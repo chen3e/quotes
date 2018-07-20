@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'quotations/main.css' %}">
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="navigation">
+                <a href="/myaccount/{{ curr_user.id }}">Edit your account</a>
+                <a class="btn btn-warning" href="/logout">Logout</a>
+            </div>
+            <h5>Welcome, {{ curr_user.first_name }}!</h5>
+            <div id="existing_quotes">
+                <h6>Quotes</h6>
+                {% for quote in quotes %}
+                    <div class="quote">
+                        <p>{{ quote.author }}: "{{ quote.quote }}"</p>
+                        <p>Posted by <a href="/user/{{ quote.uploader.id }}">{{ quote.uploader.first_name }} {{ quote.uploader.last_name }}</a></p>
+                        <div id="like_unlike">
+                            {% if curr_user not in quote.liked_users.all %}
+                                <a class="btn btn-success" href="/quotes/like/{{ curr_user.id }}/{{ quote.id }}">Like!</a>
+                            {% else %}
+                                <a class="btn btn-danger" href="/quotes/unlike/{{ curr_user.id }}/{{ quote.id }}">Unlike</a>
+                            {% endif %}
+                        </div>
+                        {% if quote.liked_users.all|length == 1 %}
+                            <p>1 person likes this</p>
+                        {% else %}
+                            <p>{{ quote.liked_users.all|length }} people like this</p>
+                        {% endif %}
+                        {% if curr_user.id == quote.uploader.id %}
+                            <a href="/quotes/delete/{{ quote.id }}">Delete</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <form action="/quotes/create" method="POST">
+                {% csrf_token %}
+                <h6>Add a quote!</h6>
+                <div id="left">
+                    <p>Author</p>
+                    <p>Quote</p>
+                </div>
+                <div id="right">
+                    <input type="text" name="author">
+                    <textarea name="quote" id="quote_box"></textarea>
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                </div>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </form>
+        </div>
+    </body>
+</html>

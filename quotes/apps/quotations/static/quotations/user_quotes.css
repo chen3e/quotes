@@ -1,0 +1,20 @@
+#wrapper{
+    padding: 20px;
+    background-color: rgb(231, 240, 250);
+}
+    #navigation{
+        float: right;
+    }
+        #navigation > *{
+            margin-left: 10px;
+        }
+    .quote{
+        border: 1px solid black;
+        width: 30%;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+        .quote > *{
+            display: block;
+            margin-bottom: 10px;
+        }

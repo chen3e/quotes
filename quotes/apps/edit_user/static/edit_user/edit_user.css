@@ -1,0 +1,19 @@
+#wrapper{
+    padding: 20px;
+    background-color: rgb(231, 240, 250);
+}
+    #navigation{
+        float: right;
+    }
+        #navigation > *{
+            margin-left: 10px;
+        }
+    #left, #right{
+        vertical-align: top;
+        margin-right: 10px;
+        display: inline-block;
+    }
+        #left > *, form > *{
+            display: block;
+            margin-top: 10px;
+        }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'quotations/user_quotes.css' %}">
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="navigation">
+                <a href="/quotes">Back</a>
+                <a class="btn btn-warning" href="/logout">Logout</a>
+            </div>
+            <h6>{{ user.first_name}} {{user.last_name}}'s quotes</h6>
+            {% for quote in quotes %}
+                <div class="quote">
+                    <p>{{ quote.author }}: "{{ quote.quote }}"</p>
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+</html>

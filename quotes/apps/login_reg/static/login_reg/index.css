@@ -1,0 +1,24 @@
+#wrapper{
+    background-color: rgb(231, 240, 250);
+}
+#registration, #login{
+    display: inline-block;
+    vertical-align: top;
+    width: 30%;
+    padding: 10px;
+}
+.left, .right{
+    display: inline-block;
+    vertical-align: top;
+    width: 132px;
+}
+#login input, #registration input{
+    display: block;
+    margin: 7px;
+}
+#login p, #registration p{
+    text-align: right;
+    margin-bottom: 13px;
+    position: relative;
+    top: 8px;
+}
